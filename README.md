@@ -150,16 +150,7 @@ npm start
 
 App por defecto: `http://localhost:4200`.
 
-## 8. Estado actual y notas importantes
-
-- La conexion de MongoDB esta hardcodeada en `backend-safeair/config/db.js`.
-- En frontend, la mayoria de servicios apunta a `http://3.145.133.233:3000/...`.
-- `resetPassword` en `auth.service.ts` usa `http://localhost:3000/...` (distinto a los demas servicios).
-- Hay rutas/strings con problemas de codificacion de caracteres (por ejemplo `contrasena` mal codificada).
-- Parte de validacion de rol en componentes esta simulada con valores fijos (`userRole = 'operator'`), no es seguridad real de backend.
-- No hay JWT/sesiones seguras en API; la sesion actual se maneja en `localStorage`.
-
-## 9. Recomendaciones tecnicas (siguiente paso)
+## 8. Recomendaciones tecnicas (siguiente paso)
 
 1. Mover URLs y credenciales a variables de entorno (`.env`).
 2. Unificar base URL del frontend para todos los servicios.
