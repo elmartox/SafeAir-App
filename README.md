@@ -156,7 +156,5 @@ App por defecto: `http://localhost:4200`.
 1. Mover URLs y credenciales a variables de entorno (`.env`).
 2. Unificar base URL del frontend para todos los servicios.
 3. Implementar autenticacion con token (JWT) y middleware de autorizacion por rol.
-4. Corregir codificacion UTF-8 en rutas y textos.
-5. Agregar README especifico dentro de `frontend-safe` y `backend-safeair` con comandos propios.
 ## 9. Conectividad en el capus de la UPS
 Aplicacion Web funcionando en: IP: http://172.17.42.142:3000
