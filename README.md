@@ -1,6 +1,7 @@
 # SafeAir App
 
-Proyecto fullstack para monitoreo de calidad de aire y control basico de actuadores (ventana, ventilador, alarma).
+Proyecto fullstack para monitoreo de calidad de aire y control basico de actuadores (ventana, ventilador, alarma). Funcionando en una máquina virtual
+de la UPS http://172.17.42.142:3000
 
 ## 1. Que hay en esta carpeta
 
@@ -157,3 +158,5 @@ App por defecto: `http://localhost:4200`.
 3. Implementar autenticacion con token (JWT) y middleware de autorizacion por rol.
 4. Corregir codificacion UTF-8 en rutas y textos.
 5. Agregar README especifico dentro de `frontend-safe` y `backend-safeair` con comandos propios.
+## 9. Conectividad en el capus de la UPS
+Aplicacion Web funcionando en: IP: http://172.17.42.142:3000
