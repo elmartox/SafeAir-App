@@ -1,0 +1,107 @@
+﻿<div class="guest-window">
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="guest-header" role="banner">
+    <div class="brand">
+      <div class="brand-text">
+        <span class="brand-title">SafeAir</span>
+      </div>
+    </div>
+<div>
+      <button class="primary-btn" type="button" (click)="onLogout()">Cerrar sesión</button>
+      </div>
+  </header>
+
+  <main id="main-content" class="guest-main" role="main">
+    <div class="welcome-banner">¡Bienvenido, {{ userName }}!</div>
+    <section class="hero-panel" aria-labelledby="status-title">
+      <div class="hero-info">
+        <p class="hero-eyebrow">Zona activa</p>
+        <h1 id="status-title">Consola personal de {{ userName }}</h1>
+        <p class="hero-subtitle">Habitacion activa: {{ gasSnapshot.room }}</p>
+        <p class="hero-message" aria-live="polite">{{ currentMessage }}</p>
+        <p class="hero-message" aria-live="polite">{{ controlStatusMessage }}</p>
+        <div class="sensor-meta" role="list">
+          <div class="sensor-item" role="listitem">
+            <span class="sensor-label">Nivel gas:</span>
+            <strong>{{ gasSnapshot.gasLevel }} ppm</strong>
+          </div>
+          <div class="sensor-item" role="listitem">
+            <span class="sensor-label">Sensores:</span>
+            <strong>{{ gasSnapshot.sensorLabel }} {{ gasSnapshot.mq2Value }}</strong>
+          </div>
+          <div class="sensor-item" role="listitem">
+            <span class="sensor-label">Sistema</span>
+            <span class="sensor-status" [class]="'pill-' + getGasStatus()">{{ getStatusLabel() }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-status" aria-label="Nivel del sensor MQ-2">
+        <div class="status-ring" [style.backgroundColor]="getStatusColor()">
+          <div class="aqi-number">{{ gasSnapshot.mq2Value }}</div>
+          <div class="aqi-label">MQ-2</div>
+        </div>
+        <span class="status-badge" [class]="'badge-' + getGasStatus()">{{ getStatusLabel() }}</span>
+      </div>
+    </section>
+
+    <section class="quick-actions" aria-label="Accesos rapidos">
+      <button class="action-btn primary" type="button" (click)="openWindow()">Abrir ventana</button>
+      <button class="action-btn" type="button" (click)="closeWindow()">Cerrar ventana</button>
+      <button class="action-btn" type="button" (click)="turnOnFan()">Encender ventilador</button>
+      <button class="action-btn" type="button" (click)="turnOffFan()">Apagar ventilador</button>
+    </section>
+
+    <section class="layout-grid" aria-label="Panel de datos">
+      <article class="card tips-card" aria-labelledby="tips-title">
+        <header class="card-header">
+          <h2 id="tips-title">Recomendaciones de seguridad</h2>
+          <h2 id="tips-title">¿Qué hacer ante una fuga de gas?</h2>
+        </header>
+        <p class="tips-message">Si sospechas una fuga, actua como emergencia y prioriza la seguridad de todos.</p>
+        <ul class="tips-list">
+          <li>Evacua de inmediato a todas las personas y mascotas.</li>
+          <li>No enciendas o apagues luces ni uses aparatos electricos.</li>
+          <li>No uses celulares ni telefonos dentro del inmueble.</li>
+          <li>Desde un lugar seguro, llama a emergencias o a la empresa de gas.</li>
+          <li>No regreses hasta que personal autorizado confirme que es seguro.</li>
+        </ul>
+        <button class="ghost-btn" type="button">Mas informacion de seguridad</button>
+      </article>
+
+
+
+      <article class="card" aria-labelledby="gas-title">
+        <header class="card-header">
+          <h2 id="gas-title">Limites de seguridad (MQ-2 Sensor)</h2>
+          <span class="card-hint">Valores de referencia</span>
+        </header>
+        <div class="gas-grid">
+          <div class="gas-card" *ngFor="let gas of gasLimits">
+            <h3>{{ gas.name }}</h3>
+            <p class="gas-limit">{{ gas.limit }}</p>
+            <p class="gas-description">{{ gas.description }}</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="card" aria-labelledby="prevention-title">
+        <header class="card-header">
+          <h2 id="prevention-title">¿Que hacer si suena la alarma de gas?</h2>
+          <span class="card-hint">Guia rapida</span>
+        </header>
+        <ol class="prevention-list">
+          <li *ngFor="let tip of preventionTips">{{ tip }}</li>
+        </ol>
+        <div class="notice">
+          <strong>Importante:</strong> Mantener la calma y actuar con rapidez puede salvar vidas.
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="guest-footer">
+    <p>Last data sync: {{ lastUpdateTime }}. SafeAir public data is provided as a service to the community.</p>
+  </footer>
+</div>

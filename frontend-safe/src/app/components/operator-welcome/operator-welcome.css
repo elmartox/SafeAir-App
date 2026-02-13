@@ -1,0 +1,139 @@
+﻿/* ============================================
+   OPERATOR WELCOME - CONTENEDOR PRINCIPAL
+   ============================================ */
+
+:host {
+  --color-primary: #0ea5a3;
+  --color-primary-strong: #0f766e;
+  --color-accent: #2563eb;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-bg: #f5f7fb;
+  --color-card: #ffffff;
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --radius: 12px;
+  --radius-lg: 18px;
+  --transition: 0.2s ease;
+  --sidebar-width: 250px;
+}
+
+.operator-shell {
+  min-height: 100vh;
+  background: var(--color-bg);
+  display: flex;
+  color: var(--color-text-primary);
+}
+
+.operator-main {
+  flex: 1;
+  padding: 24px 28px 36px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.welcome-banner {
+  font-weight: 700;
+  color: var(--color-text-secondary);
+  padding: 6px 4px 0 4px;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ============================================
+   INDICADOR DE ACCESO RESTRINGIDO
+   ============================================ */
+
+.access-indicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(239, 68, 68, 0.15);
+  border-left: 4px solid #ef4444;
+  color: #ef4444;
+  padding: 12px 14px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  animation: slideUp 0.3s ease-out;
+  z-index: 999;
+}
+
+.access-text {
+  flex: 1;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1024px) {
+  :host {
+    --sidebar-width: 210px;
+  }
+}
+
+@media (max-width: 900px) {
+  .operator-shell {
+    flex-direction: column;
+  }
+
+  .operator-main {
+    padding: 18px 16px 28px 16px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :host {
+    --color-bg: #0f172a;
+    --color-card: #1e293b;
+    --color-text-primary: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-muted: #64748b;
+    --color-border: #334155;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+:host-context(.theme-light) {
+  --color-bg: #f5f7fb;
+  --color-card: #ffffff;
+  --color-bg-card: #ffffff;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-border: #e2e8f0;
+}

@@ -1,0 +1,81 @@
+<section class="dashboard-grid" aria-label="Consultas del operador">
+  <article class="card" aria-label="Resumen de calidad por habitacion">
+    <div class="card-header">
+      <h2 class="card-title">Resumen de calidad · {{ rooms[0]?.room || selectedRoom }}</h2>
+      <span class="status-pill" [class]="'status-' + overallStatus">{{ getOverallLabel() }}</span>
+    </div>
+    <div class="card-body">
+      <div class="chart-split">
+        <div class="donut-wrapper" aria-label="Distribucion de estados">
+          <div class="chart-box donut-box">
+            <canvas id="donutChart"></canvas>
+          </div>
+          <div class="donut-center">
+            <span class="donut-value">{{ rooms[0]?.gasLevel || 0 }}</span>
+            <span class="donut-label">ppm</span>
+          </div>
+          <div class="donut-meta">Ultima lectura: {{ rooms[0]?.lastReading || 'Sin datos' }}</div>
+        </div>
+        <div class="chart-legend">
+          <p class="legend-title">Estados recientes</p>
+          <div class="legend-row" *ngFor="let segment of donutSegments">
+            <span class="legend-dot" [style.background]="segment.color"></span>
+            <span>{{ segment.label }}</span>
+            <span class="legend-value">{{ segment.value }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-panel" aria-label="Historial reciente de lecturas">
+        <div class="chart-box bar-box">
+          <canvas id="barChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" aria-label="Estado de la alarma del sistema">
+    <div class="card-header">
+      <h2 class="card-title">Estado de la alarma del sistema</h2>
+      <span class="status-pill">{{ latestReading?.controles?.estado_sistema || 'SIN DATOS' }}</span>
+    </div>
+    <div class="card-body">
+      <div class="alarm-grid alarm-grid-centered">
+        <div class="alarm-ring" aria-label="Estado de alarma">
+          <span class="alarm-value">{{ getAlarmStatus() }}</span>
+          <span class="alarm-label">Alarma</span>
+        </div>
+        <div class="alarm-info">
+          <p class="alarm-title">Estado del sistema</p>
+          <p class="alarm-status">{{ latestReading?.controles?.estado_sistema || 'SIN DATOS' }}</p>
+          <p class="alarm-note">Ultima verificacion: {{ latestReading?.fecha_hora ? (latestReading?.fecha_hora | date:'dd/MM/yyyy HH:mm') : 'Sin datos' }}</p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <article class="card" aria-label="Estado de la ventana">
+    <div class="card-header">
+      <h2 class="card-title">Tendencia de gas · {{ rooms[0]?.room || selectedRoom }}</h2>
+      <span class="status-pill status-warning">{{ getWindowStatus() }}</span>
+    </div>
+    <div class="card-body">
+      <div class="window-status">
+        <div>
+          <p class="window-label">Ventana</p>
+          <p class="window-value">{{ getWindowStatus() }}</p>
+        </div>
+        <div class="window-reco">
+          <span class="reco-icon">!</span>
+          <span>Recomendacion: {{ getWindowStatus() === 'CERRADA' ? 'Abrir ventana para ventilacion' : 'Ventilacion activa' }}</span>
+        </div>
+      </div>
+
+      <div class="line-panel" aria-label="Tendencia del sensor">
+        <div class="chart-box line-box">
+          <canvas id="lineChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>

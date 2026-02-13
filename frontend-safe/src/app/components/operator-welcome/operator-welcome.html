@@ -1,0 +1,17 @@
+﻿<!-- Contenedor del Operador con Navegacion -->
+<div class="operator-shell">
+  <app-dashboard-navbar></app-dashboard-navbar>
+
+  <div class="operator-main">
+    <app-dashboard-header></app-dashboard-header>
+    <div class="welcome-banner">¡Bienvenido, {{ userName }}!</div>
+    <div class="content-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <!-- Indicador de acceso restringido (solo visual) -->
+  <div class="access-indicator" *ngIf="!isOperator" role="alert" aria-live="polite">
+    <span class="access-text">Acceso restringido - Solo operadores</span>
+  </div>
+</div>

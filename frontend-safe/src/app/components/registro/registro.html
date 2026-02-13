@@ -1,0 +1,36 @@
+﻿<div class="auth-page register-bg">
+  <app-auth-header></app-auth-header>
+
+  <main class="auth-content">
+    <div class="auth-card">
+      <div class="auth-title">Crear Cuenta</div>
+      <div class="auth-subtitle">Completa tus datos para comenzar</div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <form class="auth-form" (ngSubmit)="onSubmit($event)">
+        <label class="input-label">Nombre completo
+          <input type="text" class="input-field" placeholder="" [(ngModel)]="fullName" name="fullName" required />
+        </label>
+
+        <label class="input-label">Email
+          <input type="email" class="input-field" [(ngModel)]="email" name="email" required />
+        </label>
+
+        <label class="input-label">Contraseña
+          <input type="password" class="input-field" placeholder="Minimo de 6 digitos"[(ngModel)]="password" name="password" required />
+        </label>
+
+        <label class="input-label">Confirmar contraseña
+          <input type="password" class="input-field" placeholder="Repite tu contraseña"[(ngModel)]="confirmPassword" name="confirmPassword" required />
+        </label>
+
+        <button type="submit" class="primary-btn" [disabled]="loading">
+          {{ loading ? 'Creando...' : 'Crear Cuenta' }}
+        </button>
+      </form>
+    </div>
+  </main>
+</div>

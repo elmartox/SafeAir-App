@@ -1,0 +1,45 @@
+﻿.info {
+  max-width: 1200px;
+  margin: 90px auto 120px;
+  padding: 0 20px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 40px;
+}
+
+.info-card {
+  text-align: center;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.info-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  display: grid;
+  place-items: center;
+}
+
+.info-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.info-card h3 {
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.info-card p {
+  margin: 0;
+  color: var(--text-gray);
+  line-height: 1.6;
+  max-width: 280px;
+}

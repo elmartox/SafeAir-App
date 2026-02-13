@@ -1,0 +1,22 @@
+﻿:host {
+  --primary-color: #10b981;
+  --primary-dark: #059669;
+  --primary-light: #d1fae5;
+  --text-dark: #0f172a;
+  --text-gray: #64748b;
+  --bg-body: #f8fafc;
+  --transition: 0.25s ease;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.safeair-container {
+  background: var(--bg-body);
+  color: var(--text-dark);
+  min-height: 100vh;
+}

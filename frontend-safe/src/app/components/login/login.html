@@ -1,0 +1,49 @@
+﻿<div class="auth-page login-bg">
+  <app-auth-header></app-auth-header>
+
+  <main class="auth-content">
+    <div class="auth-card">
+      <div class="auth-title">Bienvenido a SafeAir</div>
+      <div class="auth-subtitle">Inicia sesion para continuar</div>
+
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+
+      <form (ngSubmit)="onSubmit($event)" class="auth-form">
+        <label class="input-label">
+          Email
+          <input
+            type="email"
+            class="input-field"
+            placeholder=""
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
+        </label>
+
+        <label class="input-label">
+          Contraseña
+          <input
+            type="password"
+            class="input-field"
+            placeholder=""
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
+        </label>
+
+        <button type="submit" class="primary-btn" [disabled]="loading">
+          {{ loading ? 'Verificando...' : 'Iniciar Sesion' }}
+        </button>
+      </form>
+
+      <div class="auth-links">
+        <a routerLink="/recuperar-contraseña" class="link">¿Olvidaste tu contraseña?</a>
+        <a routerLink="/registro" class="link-muted">¿No tienes cuenta? <span>Registrate</span></a>
+      </div>
+    </div>
+  </main>
+</div>

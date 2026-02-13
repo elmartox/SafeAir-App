@@ -1,0 +1,138 @@
+﻿<!-- Configuracion del Sistema -->
+<main class="settings-container" role="main">
+  <header class="settings-header" aria-label="Encabezado de configuracion">
+    <div class="header-content">
+      <h1 class="settings-title">Configuracion</h1>
+      <p class="settings-subtitle">Opciones visuales de configuracion del sistema</p>
+    </div>
+  </header>
+
+  <section class="settings-section" aria-label="Configuracion general del sistema">
+    <article class="card settings-card">
+      <header class="card-header">
+        <h2 class="settings-group-title">Configuracion General</h2>
+      </header>
+
+      <div class="settings-list">
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3 class="setting-title">Notificaciones</h3>
+            <p class="setting-description">Recibir alertas en tiempo real</p>
+          </div>
+          <div class="setting-control">
+            <label class="switch" aria-label="Activar notificaciones">
+              <input type="checkbox" [(ngModel)]="config.notifications">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="setting-item">
+          <div class="setting-info">
+            <h3 class="setting-title">Sincronizacion en Nube</h3>
+            <p class="setting-description">Sincronizar datos con servidor</p>
+          </div>
+          <div class="setting-control">
+            <label class="switch" aria-label="Activar sincronizacion en nube">
+              <input type="checkbox" [(ngModel)]="config.cloudSync">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  
+
+  <section class="settings-section" aria-label="Configuracion de interfaz">
+    <article class="card settings-card">
+      <header class="card-header">
+        <h2 class="settings-group-title">Interfaz</h2>
+      </header>
+
+      <div class="settings-list">
+        <div class="setting-item setting-select-item">
+          <div class="setting-info">
+            <h3 class="setting-title">Tema</h3>
+            <p class="setting-description">Seleccionar tema visual</p>
+          </div>
+          <div class="setting-control">
+            <select class="setting-select" aria-label="Seleccionar tema" [(ngModel)]="config.theme">
+              <option value="light">Claro</option>
+              <option value="dark">Oscuro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="settings-section" aria-label="Configuracion de seguridad">
+    <article class="card settings-card">
+      <header class="card-header">
+        <h2 class="settings-group-title">Seguridad</h2>
+      </header>
+
+      <div class="settings-list">
+        <div class="setting-item setting-action-item">
+          <div class="setting-info">
+            <h3 class="setting-title">Cambiar Contraseña</h3>
+            <p class="setting-description">Actualizar tu contraseña de acceso</p>
+          </div>
+          <div class="setting-control">
+            <button class="btn btn-secondary btn-sm" type="button" (click)="onChangePassword()" aria-label="Cambiar contraseña">
+              Cambiar
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-item setting-action-item">
+          <div class="setting-info">
+            <h3 class="setting-title">Cerrar Sesión</h3>
+            <p class="setting-description">Salir de la aplicación</p>
+          </div>
+          <div class="setting-control">
+            <button class="btn btn-danger btn-sm" type="button" (click)="onLogout()" aria-label="Cerrar sesión">
+              Salir
+            </button>
+          </div>
+        </div>
+        </div>
+    </article>
+  </section>
+
+  <section class="settings-section" aria-label="Informacion de la aplicacion">
+    <article class="card settings-card info-card">
+      <header class="card-header">
+        <h2 class="settings-group-title">Informacion</h2>
+      </header>
+
+      <div class="info-list">
+        <div class="info-row">
+          <span class="info-label">Version de App:</span>
+          <span class="info-value">2.1.0</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Ultima actualizacion:</span>
+          <span class="info-value">9 de febrero, 2026</span>
+        </div>
+      </div>
+
+      
+    </article>
+  </section>
+
+  <section class="settings-section" aria-label="Acciones generales">
+    <article class="card settings-card action-card">
+      <div class="action-buttons">
+        <button class="btn btn-primary btn-large" type="button" (click)="onSaveSettings()" aria-label="Guardar todos los cambios">
+          Guardar Cambios
+        </button>
+        <button class="btn btn-secondary btn-large" type="button" (click)="onResetSettings()" aria-label="Restablecer configuracion predeterminada">
+          Restablecer
+        </button>
+      </div>
+    </article>
+  </section>
+</main>

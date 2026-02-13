@@ -1,0 +1,247 @@
+﻿<!-- Exportacion de Datos / Reportes -->
+<main class="reports-container" role="main">
+  <!-- Header -->
+  <header class="reports-header" aria-label="Encabezado de reportes">
+    <div class="header-content">
+      <h1 class="reports-title">Exportacion de Datos</h1>
+      <p class="reports-subtitle">Historico y exportacion de registros</p>
+    </div>
+  </header>
+
+  <!-- Seccion de Filtros -->
+  <section id="filters" class="filters-section" aria-label="Filtros de busqueda">
+    <article class="card filter-card">
+      <h2 class="filter-title">Filtro de Fechas</h2>
+
+      <form class="filter-form" aria-label="Formulario de filtros" (ngSubmit)="onFilterApply($event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="date-start" class="form-label">Fecha Inicio</label>
+            <input
+              type="date"
+              id="date-start"
+              class="form-input"
+              aria-label="Seleccionar fecha de inicio"
+              name="dateStart"
+              [(ngModel)]="filterStartDate"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="date-end" class="form-label">Fecha Fin</label>
+            <input
+              type="date"
+              id="date-end"
+              class="form-input"
+              aria-label="Seleccionar fecha de fin"
+              name="dateEnd"
+              [(ngModel)]="filterEndDate"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="alert-type" class="form-label">Tipo de Alerta</label>
+          <select
+            id="alert-type"
+            class="form-input form-select"
+            aria-label="Filtrar por tipo de alerta"
+            name="alertType"
+            [(ngModel)]="filterAlertType"
+          >
+            <option value="">Todas las alertas</option>
+            <option value="warning">Advertencias</option>
+            <option value="critical">Peligro</option>
+            <option value="info">Normal</option>
+          </select>
+        </div>
+
+        <div class="filter-actions">
+          <button class="btn btn-primary" type="submit" aria-label="Aplicar filtros">
+            Filtrar
+          </button>
+          <button class="btn btn-secondary" type="button" aria-label="Limpiar filtros" (click)="onFilterReset()">
+            Limpiar
+          </button>
+        </div>
+      </form>
+    </article>
+  </section>
+
+  <!-- Seccion de Exportacion -->
+  <section id="export" class="export-section" aria-label="Opciones de exportacion">
+    <article class="card export-card">
+      <h2 class="export-title">Exportar Datos</h2>
+
+      <div class="export-buttons">
+        <button
+          class="export-btn export-btn-csv"
+          aria-label="Exportar datos en formato XLS"
+          title="Descargar archivo XLS"
+          type="button"
+          (click)="onExportXLS()"
+        >
+          <span class="export-icon" aria-hidden="true">XLS</span>
+          <span class="export-text">
+            <span class="export-format">XLS</span>
+            <span class="export-desc">Hoja de calculo</span>
+          </span>
+        </button>
+
+        <button
+          class="export-btn export-btn-pdf"
+          aria-label="Exportar datos en formato PDF"
+          title="Descargar archivo PDF"
+          type="button"
+          (click)="onExportPDF()"
+        >
+          <span class="export-icon" aria-hidden="true">PDF</span>
+          <span class="export-text">
+            <span class="export-format">PDF</span>
+            <span class="export-desc">Reporte imprimible</span>
+          </span>
+        </button>
+
+        <button
+          class="export-btn export-btn-json"
+          aria-label="Exportar datos en formato JSON"
+          title="Descargar archivo JSON"
+          type="button"
+          (click)="onExportJSON()"
+        >
+          <span class="export-icon" aria-hidden="true">JSON</span>
+          <span class="export-text">
+            <span class="export-format">JSON</span>
+            <span class="export-desc">Datos estructurados</span>
+          </span>
+        </button>
+      </div>
+
+      <div class="export-info" aria-label="Informacion de exportacion">
+        <p class="info-text">
+          Se exportaran <strong>{{ filteredReadings.length }} registros</strong> segun los filtros aplicados
+        </p>
+      </div>
+    </article>
+  </section>
+
+  <!-- Seccion de Reportes de interes -->
+  <section class="interest-section" aria-label="Reportes de interes">
+    <header class="interest-header">
+      <h2 class="interest-title">Reportes de interes</h2>
+      <p class="interest-subtitle">Consultas rapidas basadas en lecturas del sistema</p>
+    </header>
+
+    <div class="interest-grid">
+      <article class="card interest-card">
+        <div class="interest-card-header">
+          <h3>Aperturas de ventana (semana)</h3>
+          <span class="interest-metric">{{ totalWindowOpensWeek }} aperturas</span>
+        </div>
+        <div class="interest-chart">
+          <canvas id="windowOpensChart"></canvas>
+        </div>
+        <div class="interest-actions">
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportWindowPDF()">PDF</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportWindowXLS()">XLS</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportWindowCSV()">CSV</button>
+        </div>
+      </article>
+
+      <article class="card interest-card">
+        <div class="interest-card-header">
+          <h3>Maximo de gas (mes)</h3>
+          <span class="interest-metric">{{ maxGasMonth }} ppm</span>
+        </div>
+        <div class="interest-chart">
+          <canvas id="maxGasChart"></canvas>
+        </div>
+        <div class="interest-actions">
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMaxGasPDF()">PDF</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMaxGasXLS()">XLS</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMaxGasCSV()">CSV</button>
+        </div>
+      </article>
+
+      <article class="card interest-card">
+        <div class="interest-card-header">
+          <h3>Entradas a alerta (mes)</h3>
+          <span class="interest-metric">{{ totalAlertTransitionsMonth }} eventos</span>
+        </div>
+        <div class="interest-chart">
+          <canvas id="alertTransitionsChart"></canvas>
+        </div>
+        <div class="interest-actions">
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportAlertPDF()">PDF</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportAlertXLS()">XLS</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportAlertCSV()">CSV</button>
+        </div>
+      </article>
+
+      <article class="card interest-card">
+        <div class="interest-card-header">
+          <h3>Minimo de gas (mes)</h3>
+          <span class="interest-metric">{{ minGasMonth }} ppm</span>
+        </div>
+        <div class="interest-chart">
+          <canvas id="minGasChart"></canvas>
+        </div>
+        <div class="interest-actions">
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMinGasPDF()">PDF</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMinGasXLS()">XLS</button>
+          <button class="btn btn-secondary btn-sm" type="button" (click)="onExportMinGasCSV()">CSV</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Seccion de Historico -->
+  <section class="history-section" aria-label="Historico de registros">
+    <article class="card history-card">
+      <header class="card-header">
+        <h2 class="history-title">Historico de Registros</h2>
+        <span class="record-count" aria-label="Total de registros">{{ filteredReadings.length }} registros</span>
+      </header>
+
+      <div class="table-container" role="region" aria-label="Tabla de registros historicos">
+        <table class="history-table" aria-label="Tabla de registros historicos">
+          <thead>
+            <tr>
+              <th scope="col" class="col-date">Fecha</th>
+              <th scope="col" class="col-time">Hora</th>
+              <th scope="col" class="col-level">Nivel Gas</th>
+              <th scope="col" class="col-type">Tipo</th>
+              <th scope="col" class="col-status">Estado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-row" *ngFor="let reading of pagedReadings">
+              <td class="col-date" data-label="Fecha">{{ reading.fecha_hora | date:'dd/MM/yyyy' }}</td>
+              <td class="col-time" data-label="Hora">{{ reading.fecha_hora | date:'HH:mm:ss' }}</td>
+              <td class="col-level" data-label="Nivel Gas">
+                <span class="level-badge" [class]="getLevelClass(reading)">{{ reading.sensores.nivel_gas }} ppm</span>
+              </td>
+              <td class="col-type" data-label="Tipo">{{ getAlertTypeLabel(reading) }}</td>
+              <td class="col-status" data-label="Estado">
+                <span class="status-badge" [class]="getStatusBadge(reading).className">{{ getStatusBadge(reading).label }}</span>
+              </td>
+            </tr>
+            <tr class="table-row" *ngIf="!pagedReadings.length">
+              <td colspan="5">No hay registros con los filtros actuales.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination" role="navigation" aria-label="Paginacion de registros">
+        <button class="pagination-btn pagination-prev" aria-label="Pagina anterior" [disabled]="currentPage === 1" (click)="onPreviousPage()">
+          Anterior
+        </button>
+        <span class="pagination-info">Pagina {{ currentPage }} de {{ totalPages }}</span>
+        <button class="pagination-btn pagination-next" aria-label="Pagina siguiente" [disabled]="currentPage === totalPages" (click)="onNextPage()">
+          Siguiente
+        </button>
+      </div>
+    </article>
+  </section>
+</main>
